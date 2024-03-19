@@ -4,13 +4,6 @@ program.option('-m, --month <number>');
 program.parse(process.argv);
 const options = program.opts();
 
-// エラーハンドリング
-const arg_month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-if ((!arg_month.includes(Number(options.month))) && (options.month)) {
-  console.log('不正な月です');
-  process.exit(1);
-}
-
 // 日時の取得
 let now = new Date();
 let year = now.getFullYear();
@@ -20,6 +13,13 @@ if (options.month) {
   month = options.month;
 } else {
   month = now.getMonth() + 1;
+}
+
+// エラーハンドリング
+const arg_month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+if ((!arg_month.includes(Number(month))) && (month)) {
+  console.log('不正な月です');
+  process.exit(1);
 }
 
 // Dateオブジェクトの月は0から始まるためmonthは次月になる
